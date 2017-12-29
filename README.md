@@ -4,6 +4,7 @@ Android application that shows the top entries from Reddit.
 
 
 ### Required Features ###
+List entries showing the following properties:
 
 * Title
 * Author
