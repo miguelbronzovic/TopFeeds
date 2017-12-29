@@ -24,6 +24,7 @@ import kotlinx.android.synthetic.main.activity_web_view.*
 import rx.Observable
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
+import timber.log.Timber
 
 private const val URL = "url"
 private const val REQUEST_WRITE_PERMISSIONS = 9999
@@ -76,7 +77,7 @@ class WebViewActivity : AppCompatActivity() {
 
         //noinspection SimplifiableIfStatement
         return if (id == action_save_image) {
-            requestApplicationPermisssions()
+            requestApplicationPermissions()
             true
         } else {
             super.onOptionsItemSelected(item)
@@ -93,7 +94,7 @@ class WebViewActivity : AppCompatActivity() {
         }
     }
 
-    private fun requestApplicationPermisssions() {
+    private fun requestApplicationPermissions() {
         ActivityCompat.requestPermissions(
                 this,
                 arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
@@ -114,9 +115,8 @@ class WebViewActivity : AppCompatActivity() {
         .subscribe ({ _ ->
             Toast.makeText(this, getString(R.string.save_image_download_complete), Toast.LENGTH_SHORT).show()
         }, { error ->
-            error.message?.let {
-                Toast.makeText(this, getString(R.string.save_image_download_fail), Toast.LENGTH_SHORT).show()
-            }
+            error.message?.let { Timber.e("Error saving image in gallery: $it") }
+            Toast.makeText(this, getString(R.string.save_image_download_fail), Toast.LENGTH_SHORT).show()
         })
     }
 }
