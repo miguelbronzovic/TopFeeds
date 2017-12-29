@@ -10,8 +10,8 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import java.util.concurrent.TimeUnit
 
-const val OKHTTP_CONNECTION_TIMEOUT = (30 * 1000).toLong()
-const val OKHTTP_READ_TIMEOUT = (30 * 1000).toLong()
+private const val OKHTTP_CONNECTION_TIMEOUT = (30 * 1000).toLong()
+private const val OKHTTP_READ_TIMEOUT = (30 * 1000).toLong()
 
 class ApiModule {
 
