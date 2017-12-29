@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Top Feeds</string>
+    <string name="progress_dialog_message">Retrieving data...</string>
+    <string name="error_message">Error retrieving data. </string>
+    <string name="webview_activity_title">Preview</string>
+    <string name="save_image_menu">Save image</string>
+    <string name="write_storage_permission_error">Error: permissions needed to save image to gallery</string>
+    <string name="save_image_download_complete">Download complete!</string>
+    <string name="save_image_download_fail">Download complete!</string>
+</resources>

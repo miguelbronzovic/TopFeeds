@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/white"
+                android:paddingTop="@dimen/children_item_layout_padding"
+                android:paddingBottom="@dimen/children_item_layout_padding">
+
+    <ImageView
+        android:id="@+id/thumbnail"
+        android:layout_width="@dimen/children_item_image_width"
+        android:layout_height="@dimen/children_item_image_height"
+        android:paddingLeft="@dimen/children_item_layout_padding"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:contentDescription="@null" />
+
+    <RelativeLayout
+        android:id="@+id/content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/thumbnail"
+        android:layout_marginLeft="@dimen/children_item_info_layout_margin_left"
+        android:paddingRight="@dimen/children_item_layout_padding"
+        android:layout_alignParentTop="true">
+
+        <LinearLayout
+            android:id="@+id/header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="2">
+
+            <TextView
+                android:id="@+id/author"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                style="@style/ChildrenItemAuthor" />
+
+            <TextView
+                android:id="@+id/comments"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.8"
+                style="@style/ChildrenItemComments" />
+
+            <TextView
+                android:id="@+id/created"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.2"
+                android:gravity="right|center_vertical"
+                style="@style/ChildrenItemCreated" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/header"
+            android:layout_marginTop="@dimen/text_margint_top"
+            android:gravity="left|top"
+            style="@style/ChildrenItemText" />
+
+    </RelativeLayout>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="24dp"
+        android:layout_below="@id/content"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorDivider" />
+
+</RelativeLayout>
