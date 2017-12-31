@@ -30,14 +30,14 @@ class MainActivity : AppCompatActivity(), TopNewsView, ThumbnailItemClickListene
     private val scrollListener = object : EndlessRecyclerViewScrollListener(linearLayoutManager) {
         override fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView) {
             Handler().postDelayed({
-                topNewsPresenter.onLoadMoreItems(totalItemsCount, afterValue)
+                topNewsPresenter.onLoadMoreItems(totalItemsCount, afterValue!!)
             }, 500)
         }
     }
 
     private lateinit var progressDialog: ProgressDialog
     private lateinit var adapter: ChildrenAdapter
-    private lateinit var afterValue: String
+    private var afterValue: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,7 +60,7 @@ class MainActivity : AppCompatActivity(), TopNewsView, ThumbnailItemClickListene
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        outState.putString(Constants.AFTER_VALUE, afterValue)
+        afterValue?.let { outState.putString(Constants.AFTER_VALUE, it) }
         outState.putParcelable(Constants.CHILDREN_ITEMS, Parcels.wrap(adapter.childrenItems))
     }
 
@@ -75,7 +75,7 @@ class MainActivity : AppCompatActivity(), TopNewsView, ThumbnailItemClickListene
     override fun hideProgressBar() = progressDialog.dismiss()
 
     override fun showErrorMessage(error: String) {
-        Toast.makeText(this, error, Toast.LENGTH_LONG)
+        Toast.makeText(this, error, Toast.LENGTH_LONG).show()
     }
 
     override fun loadDataItems(items: List<Children>, after: String) {

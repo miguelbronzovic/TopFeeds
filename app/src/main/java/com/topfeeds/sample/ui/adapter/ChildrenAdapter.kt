@@ -72,7 +72,7 @@ class ChildrenAdapter(val thumbnailListener: ThumbnailItemClickListener) : Recyc
                 itemView.comments.text = "${childrenItem.data.num_comments} comments"
                 itemView.created.text = "${DateHelper.calculateElapsedTimeFromNow(childrenItem.data.created_utc)} Hs"
                 itemView.title.text = childrenItem.data.title
-                itemView.thumbnail.setOnClickListener { v ->
+                itemView.thumbnail.setOnClickListener { _ ->
                     childrenItem.data.preview?.images?.get(0)?.source?.let { listener.onThumbnailClick(it.url) }
                 }
             }

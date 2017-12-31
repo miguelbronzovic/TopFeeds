@@ -12,6 +12,8 @@ import com.topfeeds.sample.model.Children
 import org.parceler.Parcels
 import rx.Subscription
 
+private const val MAX_NEWS_TO_LOAD = 50
+
 class TopNewsPresenter(view: TopNewsView) : Presenter, OnCompleteListener {
 
     private val activityView = view
@@ -28,8 +30,10 @@ class TopNewsPresenter(view: TopNewsView) : Presenter, OnCompleteListener {
     override fun showError(error: String) = activityView.showErrorMessage(error)
 
     override fun onLoadMoreItems(totalItems: Int, after: String) {
-        activityView.showProgressBar()
-        subscription = dataInteractor.getTopNews(this, totalItems, after)
+        if (totalItems < MAX_NEWS_TO_LOAD) {
+            activityView.showProgressBar()
+            subscription = dataInteractor.getTopNews(this, totalItems, after)
+        }
     }
 
     override fun onRestoreState(bundle: Bundle) {
@@ -43,5 +47,8 @@ class TopNewsPresenter(view: TopNewsView) : Presenter, OnCompleteListener {
         activityView.loadDataItems(children, after)
     }
 
-    override fun onError(errorMessage: String) = showError(errorMessage)
+    override fun onError(errorMessage: String) {
+        activityView.hideProgressBar()
+        showError(errorMessage)
+    }
 }
